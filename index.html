@@ -723,7 +723,7 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
             <div class="back-content">
               <h2>Reglamento de comodines</h2>
               <div class="terms" id="termsText"></div>
-              <div class="legend">π CANJEADO · <span class="expired-mark">∄ VENCIDO</span> · 🔒 BLOQUEADO · SIN SELLO DISPONIBLE</div>
+              <div class="legend">π CANJEADO · <span class="expired-mark">∄ VENCIDO</span> · 🔒 BLOQUEADO</div>
               <div class="back-actions">
                 <button class="btn dark" id="flipBack">Volver al frente</button>
               </div>
@@ -947,12 +947,15 @@ function characterSlug(name){
  return String(name||'personaje').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,'-').replace(/^-|-$/g,'');
 }
 function assetUrl(path){
+  const cleanPath = String(path||'').replace(/^\.\//,'');
+  const assetMap = window.TARJETA_ASSET_MAP || {};
+  if(assetMap[cleanPath]) return assetMap[cleanPath];
   const explicitBase = String(window.TARJETA_ASSET_BASE || '').trim();
   try{
-    if(explicitBase) return new URL(path, explicitBase).href;
-    return new URL(path, document.baseURI).href;
+    if(explicitBase) return new URL(cleanPath, explicitBase).href;
+    return new URL(cleanPath, document.baseURI).href;
   }catch(e){
-    return path;
+    return cleanPath;
   }
 }
 function renderCharacter(card){
