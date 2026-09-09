@@ -50,13 +50,13 @@ window.TARJETA_CONFIG = {
     },
     {
       "id": "C3",
-      "title": "Ayuda divina",
-      "rule": "Puedes pedir ayuda al profesor en una única pregunta de un portafolio grupal."
+      "title": "Lámpara mágica",
+      "rule": "Un grupo puede preguntar hasta un máximo de tres preguntas en un quiz grupal."
     },
     {
       "id": "C4",
-      "title": "Reπto!",
-      "rule": "Segunda oportunidad: el profesor realizará una revisión previa del quiz e indicará cuáles respuestas presentan errores, sin revelar las respuestas correctas. El grupo podrá corregirlas antes de la entrega definitiva. Para activarlo, todos los integrantes del grupo deberán utilizar este comodín."
+      "title": "Re·π·to!",
+      "rule": "Segunda oportunidad: el profesor realizará una revisión previa del quiz e indicará cuáles respuestas presentan errores, sin revelar las respuestas correctas. El grupo podrá corregirlas antes de la entrega definitiva."
     },
     {
       "id": "C5",
@@ -76,7 +76,7 @@ window.TARJETA_CONFIG = {
     {
       "id": "C8",
       "title": "Kupuna Wa",
-      "rule": "Tendrá 20 minutos más para finalizar un quiz."
+      "rule": "Tendrás 20 minutos más para finalizar un quiz individual. Debes solicitarlo al menos 15 minutos antes de finalizar el quiz."
     },
     {
       "id": "C9",
@@ -84,7 +84,7 @@ window.TARJETA_CONFIG = {
       "rule": "Puedes preguntarle al profesor por un ejercicio de un quiz individual y el profesor te ayudará con una respuesta."
     }
   ],
-  "terms": "1. Cada comodín puede utilizarse una única vez y queda invalidado después de su canje.\n2. Cada estudiante puede canjear un máximo de tres comodines por tarjeta. Al alcanzar el tercer canje, los comodines restantes que estén disponibles se marcarán automáticamente como ∄ VENCIDO.\n3. Ningún comodín que modifique una calificación puede elevar una evaluación por encima de 100 puntos.\n4. El canje debe realizarse durante la clase correspondiente: directamente con el profesor en modalidad presencial o mediante mensaje de Teams durante la sesión en modalidad virtual.\n5. El estudiante debe indicar claramente qué comodín desea utilizar y en qué actividad o evaluación desea aplicarlo.\n6. Los comodines no utilizados dentro de su período de vigencia pueden marcarse como ∄ VENCIDO y no podrán recuperarse.\n7. Los comodines son personales e intransferibles, excepto cuando la descripción del propio comodín indique expresamente lo contrario.\n8. Un comodín no puede utilizarse de manera retroactiva una vez finalizado el período establecido para su canje.\n9. El profesor es quien registra oficialmente el canje. La tarjeta digital muestra el estado vigente de cada comodín.\n10. Las condiciones particulares indicadas en cada comodín prevalecen sobre las condiciones generales de la tarjeta.\n11. Los espacios marcados como 🔒 BLOQUEADO están reservados para posibles comodines futuros y no se consideran disponibles hasta que el profesor los habilite.\n12. Cuando un comodín de extensión de tiempo se aplique a un trabajo o actividad grupal, todos los integrantes del grupo deberán aplicar ese mismo comodín. Si no lo hace todo el grupo, el comodín no podrá aplicarse.\n\nπ = CANJEADO · ∄ = VENCIDO · 🔒 = BLOQUEADO",
+  "terms": "1. Cada comodín puede utilizarse una única vez y queda invalidado después de su canje.\n2. Cada estudiante puede canjear un máximo de tres comodines por tarjeta. Al alcanzar el tercer canje, los comodines restantes que estén disponibles se marcarán automáticamente como ∄ VENCIDO.\n3. Ningún comodín que modifique una calificación puede elevar una evaluación por encima de 100 puntos.\n4. El canje debe realizarse durante la clase correspondiente: directamente con el profesor en modalidad presencial o mediante mensaje de Teams durante la sesión en modalidad virtual.\n5. El estudiante debe indicar claramente qué comodín desea utilizar y en qué actividad o evaluación desea aplicarlo.\n6. Los comodines no utilizados dentro de su período de vigencia pueden marcarse como ∄ VENCIDO y no podrán recuperarse.\n7. Los comodines son personales e intransferibles, excepto cuando la descripción del propio comodín indique expresamente lo contrario.\n8. Un comodín no puede utilizarse de manera retroactiva una vez finalizado el período establecido para su canje.\n9. El profesor es quien registra oficialmente el canje. La tarjeta digital muestra el estado vigente de cada comodín.\n10. Las condiciones particulares indicadas en cada comodín prevalecen sobre las condiciones generales de la tarjeta.\n11. Los espacios marcados como 🔒 BLOQUEADO están reservados para posibles comodines futuros y no se consideran disponibles hasta que el profesor los habilite.\n12. Cuando un comodín se aplique a un trabajo o actividad grupal, todos los integrantes del grupo deberán aplicar ese mismo comodín. Si no lo hace todo el grupo, el comodín no podrá aplicarse.\n\nπ = CANJEADO · ∄ = VENCIDO · 🔒 = BLOQUEADO",
   "universidad": "Universidad Fidélitas",
   "docente": "M.Sc. Armando Solís Zúñiga"
 };
