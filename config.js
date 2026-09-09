@@ -55,8 +55,8 @@ window.TARJETA_CONFIG = {
     },
     {
       "id": "C4",
-      "title": "Les Misérables",
-      "rule": "Si todo el grupo hace cara de “pobrecito”, el profesor calificará el quiz grupal con mayor benevolencia."
+      "title": "Reπto!",
+      "rule": "Segunda oportunidad: el profesor realizará una revisión previa del quiz e indicará cuáles respuestas presentan errores, sin revelar las respuestas correctas. El grupo podrá corregirlas antes de la entrega definitiva. Para activarlo, todos los integrantes del grupo deberán utilizar este comodín."
     },
     {
       "id": "C5",
