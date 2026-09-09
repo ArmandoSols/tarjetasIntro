@@ -1023,10 +1023,10 @@ function teacherEmotionFor(reward){
   const title = String(reward.title||'').toLowerCase();
   if(title.includes('próximamente')) return 'modo-profe';
   if(p.includes('presencial')){
-    const map={C1:'animo',C2:'pensando',C3:'exacto',C4:'dudas',C5:'genial',C6:'revisemos'};
+    const map={C1:'animo',C2:'pensando',C3:'exacto',C4:'dudas',C5:'genial',C6:'revisemos',C7:'modo-profe',C8:'a-estudiar',C9:'uhm'};
     return map[id]||'modo-profe';
   }else{
-    const map={C1:'exacto',C2:'dudas',C3:'cuidado',C4:'pensando',C5:'genial',C6:'animo'};
+    const map={C1:'exacto',C2:'dudas',C3:'cuidado',C4:'pensando',C5:'genial',C6:'animo',C7:'modo-profe',C8:'a-estudiar',C9:'revisemos'};
     return map[id]||'modo-profe';
   }
 }
