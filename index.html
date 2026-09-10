@@ -1068,41 +1068,24 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
   .back-actions{padding-left:72px;padding-right:72px;}
 }
 
-/* === v10.4 · mascota integrada como marca de agua en el encabezado === */
-.back-content h2{position:relative;z-index:3;overflow:hidden;}
-.back-mascot{top:36px !important;right:50px !important;bottom:auto !important;width:72px !important;height:72px !important;opacity:.17;z-index:2;filter:none;object-fit:contain;object-position:center;}
-.back-actions{padding-left:0 !important;padding-right:0 !important;}
-@media(max-width:520px){.back-mascot{top:31px !important;right:43px !important;width:62px !important;height:62px !important;opacity:.16;}}
-
-/* === v10.5 · marca de agua dentro del reglamento === */
-/* La ilustración deja el encabezado y pasa detrás del texto, muy tenue. */
+/* === v10.7 · reverso definitivo sin ilustración decorativa === */
 .back-mascot{display:none !important;}
 .terms{
   position:relative;
-  isolation:isolate;
-  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(250,248,243,.94));
+  background:linear-gradient(180deg,rgba(255,255,255,.97),rgba(250,248,243,.95));
+  color:#1f2937;
 }
-.terms::before{
-  content:"";
-  position:absolute;
-  left:50%;
-  top:50%;
-  width:min(58%,230px);
-  aspect-ratio:1/1;
-  transform:translate(-50%,-50%);
-  background-image:var(--terms-watermark);
-  background-repeat:no-repeat;
-  background-position:center;
-  background-size:contain;
-  opacity:.065;
-  filter:grayscale(12%) saturate(.78);
-  pointer-events:none;
-  z-index:0;
-}
-.terms{color:#1f2937;}
-.terms::after{content:none;}
-@media(max-width:560px){
-  .terms::before{width:min(62%,205px);opacity:.055;}
+.terms::before,.terms::after{content:none !important;}
+
+/* === v10.9 · nombre legible + reverso sin mascota === */
+.back-mascot{display:none !important;}
+.identity h2#studentName{
+  width:100%;
+  max-width:100%;
+  overflow:hidden;
+  text-align:center;
+  white-space:nowrap;
+  line-height:1.08;
 }
 </style>
 </head>
@@ -1238,7 +1221,6 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
               <div class="back-actions">
                 <button class="btn dark" id="flipBack">Volver al frente</button>
               </div>
-              <img class="back-mascot" id="backMascot" alt="¿Dudas?">
             </div>
           </article>
         </div>
@@ -1346,8 +1328,6 @@ function init(){
     .join('\n')
     .replace(/\s*·\s*🔒\s*=\s*BLOQUEADO\s*$/i, '');
   $('termsText').textContent = visibleTerms;
-  $('backMascot').src = assetUrl('teacher/dudas.png');
-  $('termsText').style.setProperty('--terms-watermark', `url("${assetUrl('teacher/dudas.png')}")`);
 
   fillSelect('regDay', CONFIG.dias);
   fillSelect('regSchedule', CONFIG.horarios);
@@ -1486,9 +1466,42 @@ function renderCharacter(card){
  img.style.cssText='width:100%;height:100%;object-fit:contain;display:block;filter:drop-shadow(0 14px 18px rgba(0,0,0,.25))';
  img.onerror=()=>{h.textContent='✦';}; h.innerHTML=''; h.appendChild(img);
 }
+function formatStudentDisplayName(card){
+  const nombre=String(card.nombre||'').trim();
+  const apellidos=String(card.apellidos||'').trim();
+  if(nombre || apellidos) return [nombre,apellidos].filter(Boolean).join(' ');
+  const completo=String(card.nombreCompleto||'').trim();
+  if(completo.includes(',')){
+    const parts=completo.split(',');
+    const apellido=parts.shift().trim();
+    const nombres=parts.join(',').trim();
+    return [nombres,apellido].filter(Boolean).join(' ');
+  }
+  return completo;
+}
+function fitStudentName(el){
+  if(!el) return;
+  const mobile=window.matchMedia && window.matchMedia('(max-width:560px)').matches;
+  let size=mobile?19:21;
+  const minSize=11;
+  el.style.whiteSpace='nowrap';
+  el.style.fontSize=size+'px';
+  el.style.lineHeight='1.08';
+  while(el.scrollWidth>el.clientWidth && size>minSize){
+    size-=0.5;
+    el.style.fontSize=size+'px';
+  }
+  if(el.scrollWidth>el.clientWidth){
+    el.style.whiteSpace='normal';
+    el.style.fontSize=minSize+'px';
+    el.style.lineHeight='1.02';
+  }
+}
 function renderCard(card){
   $('cardCourse').textContent = CONFIG.curso + ' · ' + CONFIG.modalidad;
-  $('studentName').textContent = card.nombreCompleto || (card.apellidos + ', ' + card.nombre);
+  const studentNameEl=$('studentName');
+  studentNameEl.textContent = formatStudentDisplayName(card);
+  requestAnimationFrame(()=>fitStudentName(studentNameEl));
   applyCardPalette(card.colorFavorito);
   $('studentGroup').textContent = [card.dia,card.horario].filter(Boolean).join(' · ');
   renderCharacter(card);
@@ -1602,6 +1615,7 @@ $('refreshBtn').onclick = () => {
 
 $('flipBtn').onclick = () => $('cardWrap').classList.add('flipped');
 $('flipBack').onclick = () => $('cardWrap').classList.remove('flipped');
+window.addEventListener('resize',()=>fitStudentName($('studentName')));
 
 
 $('modalClose').onclick = () => $('rewardModal').classList.add('hidden');
