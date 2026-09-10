@@ -924,6 +924,51 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
   .bo-tl,.bo-bl{left:34px}.bo-tr,.bo-br{right:34px}
 }
 
+
+
+/* === v10.2 · modal completo comunica el estado + sello VENCIDO reforzado === */
+.modal-box.modal-state-0{
+  background:radial-gradient(circle at 78% 8%,rgba(255,255,255,.82),transparent 27%),linear-gradient(145deg,#fffdf7 0%,#f4e7c9 100%);
+  border-color:rgba(121,84,32,.48);
+  box-shadow:0 30px 90px rgba(7,13,21,.42),inset 0 0 0 5px rgba(255,255,255,.46),inset 0 0 0 7px rgba(121,84,32,.09);
+}
+.modal-box.modal-state-0::after{border-color:rgba(116,79,28,.24)}
+.modal-box.modal-state-1{
+  background:radial-gradient(circle at 78% 8%,rgba(255,255,255,.58),transparent 28%),linear-gradient(145deg,#fff6cf 0%,#ecd58d 100%);
+  border-color:rgba(151,108,20,.58);
+  box-shadow:0 30px 90px rgba(7,13,21,.42),inset 0 0 0 5px rgba(255,251,225,.42),inset 0 0 0 7px rgba(151,108,20,.13);
+}
+.modal-box.modal-state-1::after{border-color:rgba(151,108,20,.34)}
+.modal-box.modal-state-1 .reward-copy h3{background:linear-gradient(180deg,rgba(255,249,220,.98),rgba(231,207,137,.96));border-color:rgba(151,108,20,.34)}
+.modal-box.modal-state-1 .teacher-portrait{border-color:rgba(151,108,20,.36);background:rgba(255,246,203,.34)}
+.modal-box.modal-state-2{
+  background:radial-gradient(circle at 78% 8%,rgba(255,255,255,.44),transparent 28%),linear-gradient(145deg,#f7e6df 0%,#d8aa98 100%);
+  border-color:rgba(143,72,45,.58);
+  box-shadow:0 30px 90px rgba(7,13,21,.44),inset 0 0 0 5px rgba(255,242,237,.34),inset 0 0 0 7px rgba(143,72,45,.14);
+}
+.modal-box.modal-state-2::after{border-color:rgba(143,72,45,.34)}
+.modal-box.modal-state-2 .reward-copy h3{background:linear-gradient(180deg,rgba(250,233,225,.98),rgba(213,171,154,.96));border-color:rgba(143,72,45,.34)}
+.modal-box.modal-state-2 .teacher-portrait{border-color:rgba(143,72,45,.38);background:rgba(239,207,194,.30)}
+.modal-box.modal-state-3{
+  background:radial-gradient(circle at 78% 8%,rgba(255,255,255,.46),transparent 28%),linear-gradient(145deg,#eef1f4 0%,#c7cdd5 100%);
+  border-color:rgba(78,89,104,.48);
+  box-shadow:0 30px 90px rgba(7,13,21,.44),inset 0 0 0 5px rgba(255,255,255,.32),inset 0 0 0 7px rgba(78,89,104,.12);
+}
+.modal-box.modal-state-3::after{border-color:rgba(78,89,104,.30)}
+.modal-box.modal-state-3 .reward-copy h3{background:linear-gradient(180deg,rgba(245,247,249,.98),rgba(207,213,220,.96));border-color:rgba(78,89,104,.30)}
+.modal-box.modal-state-3 .teacher-portrait{border-color:rgba(78,89,104,.34);background:rgba(222,227,233,.34)}
+.modal-box.modal-state-1 .reward-copy p{background:rgba(255,249,221,.48)}
+.modal-box.modal-state-2 .reward-copy p{background:rgba(250,232,224,.48)}
+.modal-box.modal-state-3 .reward-copy p{background:rgba(242,245,248,.48)}
+.state-2 .stamp-inner{
+  color:#ffb184;
+  background:rgba(92,37,22,.90);
+  border:3px double #ffb184;
+  opacity:1;
+  text-shadow:0 1px 0 rgba(0,0,0,.45),0 0 7px rgba(255,177,132,.24);
+  box-shadow:0 4px 13px rgba(0,0,0,.42),inset 0 0 0 1px rgba(255,232,218,.16);
+}
+
 </style>
 </head>
 <body>
