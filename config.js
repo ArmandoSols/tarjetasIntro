@@ -34,7 +34,7 @@ window.TARJETA_CONFIG = {
     "Panda rojo japonés",
     "Tucán andino",
     "Gato egipcio",
-    "Cuervo celta",
+    "Lobo nórdico",
     "Dragón fantástico"
   ],
   "rewards": [
