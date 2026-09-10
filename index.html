@@ -1077,15 +1077,17 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
 }
 .terms::before,.terms::after{content:none !important;}
 
-/* === v10.9 · nombre legible + reverso sin mascota === */
+/* === v10.12 · nombre legible sin recorte de descendentes === */
 .back-mascot{display:none !important;}
 .identity h2#studentName{
   width:100%;
   max-width:100%;
-  overflow:hidden;
   text-align:center;
   white-space:nowrap;
-  line-height:1.08;
+  line-height:1.22;
+  padding:1px 0 3px;
+  margin:0;
+  overflow:visible;
 }
 </style>
 </head>
@@ -1179,7 +1181,7 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
     <section class="panel hidden loading" id="loadingPanel">
       <div class="spinner"></div>
       <strong>Recuperando tu tarjeta…</strong>
-      <div class="msg">Consultando Google Sheets.</div>
+      <div class="msg">Consultando base de datos.</div>
     </section>
 
     <section class="hidden" id="cardPanel">
@@ -1486,7 +1488,7 @@ function fitStudentName(el){
   const minSize=11;
   el.style.whiteSpace='nowrap';
   el.style.fontSize=size+'px';
-  el.style.lineHeight='1.08';
+  el.style.lineHeight='1.22';
   while(el.scrollWidth>el.clientWidth && size>minSize){
     size-=0.5;
     el.style.fontSize=size+'px';
@@ -1494,7 +1496,7 @@ function fitStudentName(el){
   if(el.scrollWidth>el.clientWidth){
     el.style.whiteSpace='normal';
     el.style.fontSize=minSize+'px';
-    el.style.lineHeight='1.02';
+    el.style.lineHeight='1.16';
   }
 }
 function renderCard(card){
