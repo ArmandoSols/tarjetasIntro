@@ -1197,7 +1197,7 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
 }
 
 
-/* === v12.3 · avatares de dos estados + emblema interactivo === */
+/* === v12.5 · avatares de dos estados + emblema interactivo === */
 .avatar#characterAvatar{
   cursor:pointer;
   transition:transform .18s ease, box-shadow .18s ease;
@@ -1254,6 +1254,13 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
   .character-logo-image{max-height:180px}
 }
 
+.reward-details{display:grid;gap:8px;margin-top:10px;text-align:left}
+.reward-detail{padding:9px 11px;border:1px solid rgba(111,76,30,.16);border-radius:12px;background:rgba(255,255,255,.58);color:#3f4650;font-size:13px;line-height:1.42}
+.reward-detail strong{display:block;margin-bottom:2px;color:#10263f;font-size:10px;letter-spacing:.1em;text-transform:uppercase}
+.reward-detail.hidden{display:none}
+.modal-box.modal-state-1 .reward-detail{background:rgba(255,249,221,.55)}
+.modal-box.modal-state-2 .reward-detail{background:rgba(250,232,224,.55)}
+.modal-box.modal-state-3 .reward-detail{background:rgba(242,245,248,.62)}
 </style>
 </head>
 <body>
@@ -1323,7 +1330,7 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
           <select id="regCharacter"></select>
         </div>
         <div class="field">
-          <label>Color favorito</label>
+          <label>Color de tarjeta</label>
           <select id="regColor"></select>
         </div>
       </div>
@@ -1408,7 +1415,11 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
       <div class="reward-copy">
         <div class="kicker" id="modalId"></div>
         <h3 id="modalTitle"></h3>
-        <p id="modalRule"></p>
+        <div class="reward-details" id="rewardDetails">
+          <div class="reward-detail" id="benefitDetail"><strong>Beneficio</strong><span id="modalBenefit"></span></div>
+          <div class="reward-detail" id="conditionDetail"><strong>Condición</strong><span id="modalCondition"></span></div>
+          <div class="reward-detail" id="restrictionDetail"><strong>Restricción</strong><span id="modalRestriction"></span></div>
+        </div>
         <div class="state-line" id="modalState"></div>
         <div class="actions">
           <button class="btn dark" id="modalClose">Cerrar</button>
@@ -1790,7 +1801,15 @@ function openReward(reward,state){
   }
   $('modalId').textContent = reward.id;
   $('modalTitle').textContent = reward.title;
-  $('modalRule').textContent = reward.rule;
+  const details={
+    benefit:String(reward.benefit||reward.rule||'').trim(),
+    condition:String(reward.condition||'').trim(),
+    restriction:String(reward.restriction||'').trim()
+  };
+  [['benefit','Benefit'],['condition','Condition'],['restriction','Restriction']].forEach(([key,suffix])=>{
+    $('modal'+suffix).textContent=details[key];
+    $(key+'Detail').classList.toggle('hidden',!details[key]);
+  });
   $('modalState').textContent = 'Estado: ' + (labels[state] || 'DISPONIBLE');
   const teacherImg = $('teacherEmotion');
   teacherImg.onerror = () => {
