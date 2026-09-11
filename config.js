@@ -3,7 +3,7 @@ window.TARJETA_CONFIG = {
   "curso": "Introducción al Cálculo",
   "cursoCorto": "Intro",
   "modalidad": "Presencial",
-  "scriptUrl": "https://script.google.com/macros/s/AKfycbwBLt3CVNHX_m32yVzXkDI_g0Qr6KD59JLRcdzZb8Ns0MkR2k6C5HosjGQW8vwY4tR1GA/exec",
+  "scriptUrl": "https://script.google.com/macros/s/AKfycbyeoX4IefJz4TWi3_vDQGBzoi_KylsazJif-5-9HH_GEM-QhEFqYTJbhrPcrbKm9bPq5w/exec",
   "dominio": "@ufide.ac.cr",
   "schemaVersion": 2,
   "dias": [
