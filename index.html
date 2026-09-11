@@ -59,6 +59,11 @@ button{cursor:pointer}
 .choice.primary{background:var(--navy);color:white;border-color:var(--navy)}
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .field.full{grid-column:1/-1}
+.email-composite{display:flex;align-items:center;border:1px solid #cbd5e1;border-radius:11px;background:#fff;overflow:hidden;transition:.2s}
+.email-composite:focus-within{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,118,110,.13)}
+.email-composite input{border:0!important;box-shadow:none!important;border-radius:0;min-width:0}
+.email-domain{padding:0 12px 0 6px;color:#475569;font-weight:800;white-space:nowrap}
+.mode-badge{display:inline-flex;align-items:center;gap:5px;margin-top:5px;padding:4px 10px;border-radius:999px;background:rgba(255,255,255,.16);font-size:10px;font-weight:900;letter-spacing:.08em}
 label{display:block;font-size:12px;font-weight:800;margin:0 0 6px;color:#3c4657}
 input,select{
   width:100%;
@@ -1192,7 +1197,7 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
 }
 
 
-/* === v11.0 · avatares de dos estados + emblema interactivo === */
+/* === v12.3 · avatares de dos estados + emblema interactivo === */
 .avatar#characterAvatar{
   cursor:pointer;
   transition:transform .18s ease, box-shadow .18s ease;
@@ -1272,8 +1277,9 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
       <h2>Abrir mi tarjeta</h2>
       <div class="form-grid">
         <div class="field full">
-          <label>Correo institucional</label>
-          <input type="email" id="loginEmail" autocomplete="email" placeholder="nombre@ufide.ac.cr">
+          <label for="loginEmail">Correo institucional</label>
+          <div class="email-composite"><input id="loginEmail" autocomplete="username" inputmode="email" placeholder="nombre"><span class="email-domain">@ufide.ac.cr</span></div>
+          <div class="msg">Escribe solo lo que aparece antes del @.</div>
         </div>
         <div class="field full">
           <label>Código de tarjeta</label>
@@ -1300,8 +1306,9 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
           <input id="regLast" autocomplete="family-name">
         </div>
         <div class="field full">
-          <label>Correo institucional</label>
-          <input type="email" id="regEmail" autocomplete="email" placeholder="nombre@ufide.ac.cr">
+          <label for="regEmail">Correo institucional</label>
+          <div class="email-composite"><input id="regEmail" autocomplete="email" inputmode="email" placeholder="nombre"><span class="email-domain">@ufide.ac.cr</span></div>
+          <div class="msg">Escribe solo lo que aparece antes del @.</div>
         </div>
         <div class="field">
           <label>Día</label>
@@ -1353,6 +1360,7 @@ input:focus,select:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(15,1
             <div class="front-content">
               <div class="topline">
                 <div class="course" id="cardCourse"></div>
+                <div class="mode-badge" id="modeBadge"></div>
               </div>
               <div class="avatar" id="characterAvatar" role="button" tabindex="0" aria-label="Ver emblema del personaje" title="Ver emblema del personaje">
                 <div class="avatar-emoji" id="avatarEmoji"></div>
@@ -1445,16 +1453,35 @@ function storageKey(){
 }
 
 function getSaved(){
-  try{return JSON.parse(localStorage.getItem(storageKey()) || 'null')}catch(e){return null}
+  try{
+    const current=JSON.parse(localStorage.getItem(storageKey()) || 'null');
+    if(current) return current;
+    const legacyKey='tarjetaGamificada:' + CONFIG.cursoCorto + ':' + CONFIG.modalidad;
+    const legacy=JSON.parse(localStorage.getItem(legacyKey) || 'null');
+    if(legacy){ saveAccess(legacy.correo,legacy.codigo); return legacy; }
+    return null;
+  }catch(e){return null}
 }
 function saveAccess(correo,codigo){
   localStorage.setItem(storageKey(), JSON.stringify({correo, codigo}));
 }
 function clearAccess(){
   localStorage.removeItem(storageKey());
+  localStorage.removeItem('tarjetaGamificada:' + CONFIG.cursoCorto + ':' + CONFIG.modalidad);
 }
 
-function normalizeEmail(s){ return String(s||'').trim().toLowerCase(); }
+const INSTITUTIONAL_DOMAIN='@ufide.ac.cr';
+function normalizeEmail(s){
+  let value=String(s||'').trim().toLowerCase().replace(/\s+/g,'');
+  if(!value) return '';
+  if(value.endsWith(INSTITUTIONAL_DOMAIN)) value=value.slice(0,-INSTITUTIONAL_DOMAIN.length);
+  if(value.includes('@')) return '';
+  return value+INSTITUTIONAL_DOMAIN;
+}
+function emailLocalPart(s){
+  const email=normalizeEmail(s);
+  return email ? email.slice(0,-INSTITUTIONAL_DOMAIN.length) : String(s||'').trim();
+}
 function normalizeCode(s){ return String(s||'').trim().toUpperCase().replace(/\s+/g,''); }
 
 function fillSelect(id, values, formatter){
@@ -1469,14 +1496,14 @@ function fillSelect(id, values, formatter){
 }
 
 const COLOR_PALETTES = {
-  'Azul':    ['#10263f','#1e4d73','#2f80c7'],
-  'Teal':    ['#103c3a','#176b66','#29a39a'],
-  'Naranja': ['#5a2a12','#a54612','#ea6a19'],
-  'Morado':  ['#2f2048','#5d3a86','#8b5cf6'],
-  'Verde':   ['#173d2b','#2f6b4b','#52a36f'],
-  'Rojo':    ['#4b1d24','#8e2f3e','#cf4d5f'],
-  'Rosado':  ['#4a2438','#8f466d','#d86b9f'],
-  'Dorado':  ['#493718','#8a681f','#d6a62f']
+  'Azul':    ['#10263f','#1e4d73','#2367a0'],
+  'Teal':    ['#103c3a','#176b66','#14746f'],
+  'Naranja': ['#5a2a12','#933d10','#b9470d'],
+  'Morado':  ['#2f2048','#5d3a86','#7547d1'],
+  'Verde':   ['#173d2b','#2f6b4b','#357348'],
+  'Rojo':    ['#4b1d24','#7f2938','#a93648'],
+  'Rosado':  ['#4a2438','#7f3a60','#a83e72'],
+  'Dorado':  ['#493718','#715518','#806018']
 };
 
 function applyCardPalette(color){
@@ -1504,6 +1531,13 @@ function init(){
   fillSelect('regSchedule', CONFIG.horarios);
   fillSelect('regCharacter', [...new Set((CONFIG.personajes||[]).map(x => x==='Cuervo celta' ? 'Lobo nórdico' : x))]);
   fillSelect('regColor', CONFIG.colores);
+  ['loginEmail','regEmail'].forEach(id=>{
+    const input=$(id);
+    input.addEventListener('input',()=>{
+      const value=String(input.value||'').trim().toLowerCase();
+      if(value.endsWith(INSTITUTIONAL_DOMAIN)) input.value=value.slice(0,-INSTITUTIONAL_DOMAIN.length);
+    });
+  });
 
   const saved = getSaved();
   if (saved && saved.correo && saved.codigo) {
@@ -1529,7 +1563,7 @@ async function accessCard(correo, codigo, automatic=false){
     if (!data.ok || !data.found) {
       if (automatic) clearAccess();
       showPanel('loginPanel');
-      $('loginEmail').value = normalizeEmail(correo);
+      $('loginEmail').value = emailLocalPart(correo);
       $('loginCode').value = '';
       $('loginMsg').textContent = data.error || 'No fue posible encontrar la tarjeta.';
       $('loginMsg').className = 'msg error';
@@ -1550,25 +1584,26 @@ async function accessCard(correo, codigo, automatic=false){
 async function registerCard(){
   const nombre = $('regName').value.trim();
   const apellidos = $('regLast').value.trim();
-  const correo = normalizeEmail($('regEmail').value);
+  const correoIngresado = $('regEmail').value;
+  const correo = normalizeEmail(correoIngresado);
   const dia = $('regDay').value;
   const horario = $('regSchedule').value;
 
   $('registerMsg').textContent = '';
   $('registerMsg').className = 'msg';
 
-  if (!nombre || !apellidos || !correo || !dia || !horario) {
+  if (!nombre || !apellidos || !dia || !horario || !String(correoIngresado).trim()) {
     $('registerMsg').textContent = 'Completa todos los datos.';
     $('registerMsg').className = 'msg error';
     return;
   }
 
-  const domain = String(CONFIG.dominio || '@ufide.ac.cr').toLowerCase();
-  if (!correo.endsWith(domain.startsWith('@') ? domain : '@'+domain)) {
-    $('registerMsg').textContent = 'Debes usar tu correo institucional ' + CONFIG.dominio + '.';
+  if (!correo) {
+    $('registerMsg').textContent = 'Escribe solo el usuario de tu correo institucional, sin @ufide.ac.cr ni otro dominio.';
     $('registerMsg').className = 'msg error';
     return;
   }
+  $('regEmail').value=emailLocalPart(correo);
 
   showPanel('loadingPanel');
 
@@ -1577,7 +1612,7 @@ async function registerCard(){
     curso:CONFIG.curso,
     cursoCorto:CONFIG.cursoCorto,
     modalidad:CONFIG.modalidad,
-    dominio:CONFIG.dominio,
+    dominio:INSTITUTIONAL_DOMAIN,
     dia,
     horario,
     nombre,
@@ -1695,12 +1730,13 @@ function fitStudentName(el){
   }
 }
 function renderCard(card){
-  $('cardCourse').textContent = CONFIG.curso + ' · ' + CONFIG.modalidad;
+  $('cardCourse').textContent = CONFIG.curso;
+  $('modeBadge').textContent = String(CONFIG.modalidad||'').toLowerCase().includes('virtual') ? '💻 VIRTUAL' : '🏫 PRESENCIAL';
   const studentNameEl=$('studentName');
   studentNameEl.textContent = formatStudentDisplayName(card);
   requestAnimationFrame(()=>fitStudentName(studentNameEl));
   applyCardPalette(card.colorFavorito);
-  $('studentGroup').textContent = [card.dia,card.horario].filter(Boolean).join(' · ');
+  $('studentGroup').textContent = [card.grupo ? 'Grupo '+card.grupo : '',card.dia,card.horario].filter(Boolean).join(' · ');
   renderCharacter(card);
 
   const used = Number(card.usedCount || 0);
