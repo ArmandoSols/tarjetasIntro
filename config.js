@@ -1,8 +1,9 @@
 window.TARJETA_CONFIG = {
+  "appVersion": "12.7",
   "curso": "Introducción al Cálculo",
   "cursoCorto": "Intro",
   "modalidad": "Presencial",
-  "scriptUrl": "https://script.google.com/macros/s/AKfycbyeoX4IefJz4TWi3_vDQGBzoi_KylsazJif-5-9HH_GEM-QhEFqYTJbhrPcrbKm9bPq5w/exec",
+  "scriptUrl": "https://script.google.com/macros/s/AKfycbwBLt3CVNHX_m32yVzXkDI_g0Qr6KD59JLRcdzZb8Ns0MkR2k6C5HosjGQW8vwY4tR1GA/exec",
   "dominio": "@ufide.ac.cr",
   "schemaVersion": 2,
   "dias": [
@@ -35,22 +36,22 @@ window.TARJETA_CONFIG = {
     "Panda rojo japonés",
     "Tucán andino",
     "Gato egipcio",
-    "Lobo nórdico",
+    "Lobo celta",
     "Dragón fantástico"
   ],
   "rewards": [
     {
       "id": "C1",
       "title": "FIDE-lidad",
-      "rule": "Asiste las 15 semanas y podrás usar este comodín para obtener 1 punto extra en alguna evaluación con calificación menor de 100.",
-      "benefit": "1 punto extra en una evaluación con calificación menor de 100.",
+      "rule": "Asiste las 15 semanas y obtienes un punto extra en alguna evaluación individual.",
+      "benefit": "1 punto extra en un quiz individual, sopa de letras o integración de conocimientos.",
       "condition": "Asistir las 15 semanas.",
-      "restriction": "La calificación final no puede superar 100 puntos."
+      "restriction": "No aplica a evaluaciones grupales."
     },
     {
       "id": "C2",
-      "title": "Master Sopita Chef",
-      "rule": "Puedes preguntarle al profesor por una palabra correcta en una de las sopas de letras. Válido únicamente en una sopa de letras.",
+      "title": "Máster Sopita Chef",
+      "rule": "Puedes preguntarle al profesor por una palabra correcta en una de las sopas de letras.",
       "benefit": "Una palabra correcta proporcionada por el profesor.",
       "condition": "Solicitarla durante una sopa de letras.",
       "restriction": "Válido únicamente en una sopa de letras."
@@ -59,41 +60,41 @@ window.TARJETA_CONFIG = {
       "id": "C3",
       "title": "Lámpara mágica",
       "rule": "Un grupo puede preguntar hasta un máximo de tres preguntas en un quiz grupal.",
-      "benefit": "Hasta tres preguntas al profesor.",
-      "condition": "Aplicarlo en un quiz grupal.",
-      "restriction": "Máximo tres preguntas para todo el grupo."
+      "benefit": "Tres preguntas al profesor en un quiz grupal.",
+      "condition": "Todos aplican el comodín.",
+      "restriction": "Son solo tres preguntas para todo el grupo."
     },
     {
       "id": "C4",
       "title": "Re·π·to!",
-      "rule": "Segunda oportunidad: el profesor realizará una revisión previa del quiz e indicará cuáles respuestas presentan errores, sin revelar las respuestas correctas. El grupo podrá corregirlas antes de la entrega definitiva.",
-      "benefit": "Corregir respuestas antes de la entrega definitiva.",
-      "condition": "El profesor realiza una revisión previa e identifica cuáles tienen errores.",
+      "rule": "El profesor realizará una revisión previa del quiz e indicará cuáles respuestas presentan errores. El grupo podrá corregirlas antes de la entrega definitiva.",
+      "benefit": "Segunda oportunidad en un quiz grupal.",
+      "condition": "Solicitarlo 15 minutos antes de la entrega final.",
       "restriction": "No se revelan las respuestas correctas."
     },
     {
       "id": "C5",
       "title": "Quien ríe al último",
-      "rule": "Si detectas un error del profesor durante la clase, puedes recuperar 1 punto en una evaluación.",
-      "benefit": "Recuperar 1 punto en una evaluación.",
+      "rule": "Si detectas un error del profesor durante la clase, puedes recuperar 1 punto en una evaluación individual.",
+      "benefit": "1 punto extra en un quiz individual, sopa de letras o integración de conocimientos.",
       "condition": "Detectar un error del profesor durante la clase.",
-      "restriction": ""
+      "restriction": "Ninguna."
     },
     {
       "id": "C6",
       "title": "Álgebra de Baldor",
-      "rule": "Si traes resuelta toda la práctica correspondiente a un portafolio, tendrás derecho a medio puntaje de un ejercicio.",
-      "benefit": "Medio puntaje de un ejercicio.",
-      "condition": "Presentar resuelta toda la práctica correspondiente a un portafolio.",
-      "restriction": ""
+      "rule": "Si traes resuelta toda la práctica correspondiente a un quiz, tendrás derecho a medio puntaje total en un ejercicio del quiz correspondiente.",
+      "benefit": "Un ejercicio del quiz ya tendrá la mitad de los puntos.",
+      "condition": "Presentar resuelta toda la práctica del quiz correspondiente.",
+      "restriction": "En un quiz grupal, solo aplica a quienes hayan entregado toda la práctica."
     },
     {
       "id": "C7",
       "title": "¿Qué pasó ayer?",
-      "rule": "Permite extender hasta 24 horas más una entrega de trabajo sin sufrir penalización. No aplica para portafolios.",
+      "rule": "Permite extender hasta 24 horas más una entrega de trabajo sin sufrir penalización. No aplica a evaluaciones en clase.",
       "benefit": "Hasta 24 horas adicionales para una entrega sin penalización.",
-      "condition": "Aplicarlo a una entrega de trabajo.",
-      "restriction": "No aplica para portafolios."
+      "condition": "Indicar durante la clase a cuál trabajo se le aplicará.",
+      "restriction": "Solo aplicable al Proyecto e Integración de Conocimientos."
     },
     {
       "id": "C8",
